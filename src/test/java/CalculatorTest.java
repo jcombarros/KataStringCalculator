@@ -40,9 +40,9 @@ public class CalculatorTest {
 		calculator.add("a");
 	}
 	
-	@Test(expected=IllegalArgumentException.class)
+	@Test
 	public void threeNumberesStringInputTest(){
-		calculator.add("1,1,1");
+		assertEquals(3, calculator.add("1,1,1"));
 	}
 
 }
