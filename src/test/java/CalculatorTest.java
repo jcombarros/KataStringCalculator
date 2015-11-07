@@ -55,7 +55,7 @@ public class CalculatorTest {
 	
 	@Test
 	public void changeSeparatorTest(){
-		assertEquals(3, calculator.add("//;\n1;2"));
+		assertEquals(3, calculator.add("//[;]\n1;2"));
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
@@ -80,18 +80,18 @@ public class CalculatorTest {
 	
 	@Test
 	public void BigNumbers3InputTest(){
-		assertEquals(1002, calculator.add("//;\n1;1000;1"));
+		assertEquals(1002, calculator.add("//[;]\n1;1000;1"));
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
 	public void BigNumbers4InputTest(){
-		assertEquals(2, calculator.add("//;\n1;-1001;1"));
+		assertEquals(2, calculator.add("//[;]\n1;-1001;1"));
 	}
 	
 	
 	@Test
 	public void multipleSeparatorTest(){
-		assertEquals(3, calculator.add("//[***]\n1***2"));
+		assertEquals(3, calculator.add("//[qqq]\n1qqq2"));
 	}
 
 }
