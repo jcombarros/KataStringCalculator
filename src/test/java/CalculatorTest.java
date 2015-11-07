@@ -62,5 +62,10 @@ public class CalculatorTest {
 	public void negativeNumberInputTest(){
 		assertEquals(3, calculator.add("1,-1,1"));
 	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void negativeSimbolInputTest(){
+		assertEquals(3, calculator.add("1,-,1"));
+	}
 
 }
