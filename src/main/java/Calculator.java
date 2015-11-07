@@ -12,6 +12,7 @@ public class Calculator {
 	private static final String COMMA = ",";
 	private static final String NEW_LINE = "\n";
 	private static final String SPLIT_LINE = "|";
+	private static final String NEGATIVE_NUMBER = "-";
 	
 	public Calculator(){
 		separators = new ArrayList<String>();
@@ -66,11 +67,22 @@ public class Calculator {
 			throw new IllegalArgumentException("Illegal format");
 		}
 		
+		boolean withNegativeNumbers = false;
+		List<String> negativeNumbers = new ArrayList<String>();
+		
 		List<String> values = Arrays.asList(this.numbers.split(separatorsToString()));
 		int result = 0;
 		for (String value : values) {
 			int intValue = Integer.parseInt(value);
 			result = result += intValue;
+			if(value.startsWith(NEGATIVE_NUMBER)){
+				withNegativeNumbers = true;
+				negativeNumbers.add(value);
+			}
+		}
+		
+		if(withNegativeNumbers){
+			throw new IllegalArgumentException(new StringBuilder("Negatives not allowed: ").append(negativeNumbers.toString()).toString());
 		}
 		
 		resetSeparators();
@@ -86,7 +98,7 @@ public class Calculator {
 		boolean lastValueIsNumber = false;
 		for (String value : values) {
 			//Valid characters
-			if(!(separators.contains(value) || isNumber(value))){
+			if(!(separators.contains(value) || value.equals(NEGATIVE_NUMBER) || isNumber(value))){
 				isValid = false;
 			}
 			
