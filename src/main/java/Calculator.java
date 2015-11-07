@@ -73,7 +73,7 @@ public class Calculator {
 			return 0;
 		}
 		checkSeparators();
-		if(!isValidInput()){
+		if(!(isValidInput() && checkSeparators())){
 			throw new IllegalArgumentException("Illegal format");
 		}
 		
@@ -124,9 +124,11 @@ public class Calculator {
 		    String[] numberParts = numbers.split(NEW_LINE);
 		    String separatorString = numberParts[0];
 			separatorString = separatorString.substring(2, separatorString.length());
-			String delimiter = separatorString.split(DELIMITTERS_END)[0];
-		    
-			separators.add(delimiter.substring(1, delimiter.length()));
+			List<String> delimiters = Arrays.asList(separatorString.split(DELIMITTERS_END));
+		    for (String delimiter : delimiters) {
+		    	separators.add(delimiter.substring(1, delimiter.length()));
+			}
+			
 			this.numbers = numberParts[1];
 		}
 		
