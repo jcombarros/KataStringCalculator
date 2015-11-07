@@ -83,7 +83,7 @@ public class CalculatorTest {
 		assertEquals(1002, calculator.add("//;\n1;1000;1"));
 	}
 	
-	@Test
+	@Test(expected=IllegalArgumentException.class)
 	public void BigNumbers4InputTest(){
 		assertEquals(2, calculator.add("//;\n1;-1001;1"));
 	}
