@@ -57,5 +57,10 @@ public class CalculatorTest {
 	public void changeSeparatorTest(){
 		assertEquals(3, calculator.add("//;\n1;2"));
 	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void negativeNumberInputTest(){
+		assertEquals(3, calculator.add("1,-1,1"));
+	}
 
 }
