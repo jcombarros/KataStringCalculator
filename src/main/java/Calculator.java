@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 public class Calculator {
@@ -12,9 +14,15 @@ public class Calculator {
 	private static final String COMMA = ",";
 	private static final String NEW_LINE = "\n";
 	private static final String SPLIT_LINE = "|";
-	private static final String NEGATIVE_NUMBER = "-";
 	private static final int ZERO_NUMBER = 0;
 	private static final int BIG_NUMBER = 1000;
+	
+	
+	private static final String DELIMITTERS_PATTERN = "\\/\\/(\\[([^0-9]+)\\])+\n(.*)";
+	private static final String DELIMITTERS_END = "\\]";
+	
+	private static final String NUMBERS_PATTERN_BEGGINGING = "[0-9]+([";
+	private static final String NUMBERS_PATTERN_END = "]+[0-9]+)*";
 	
 	public Calculator(){
 		separators = new ArrayList<String>();
@@ -94,44 +102,35 @@ public class Calculator {
 	}
 	
 	private boolean isValidInput(){
+		String separatorsString = separatorsToString();
+		Pattern pattern = Pattern.compile(new StringBuilder(NUMBERS_PATTERN_BEGGINGING).append(separatorsString).append(NUMBERS_PATTERN_END).toString());
+		Matcher matcher;
+		matcher = pattern.matcher(numbers);
+	    if(!matcher.matches()){
+	    	return false;
+	    }
+	    return true;
+	}
+	
+	private boolean checkSeparators(){
+		Pattern pattern = Pattern.compile(DELIMITTERS_PATTERN);
+		Matcher matcher;
 
-		
-		boolean isValid = true;
-		List<String> values = Arrays.asList(this.numbers.split(""));
-		
-		boolean lastValueIsNumber = false;
-		for (String value : values) {
-			//Valid characters
-			if(!(separators.contains(value) || value.equals(NEGATIVE_NUMBER) || isNumber(value))){
-				isValid = false;
-			}
-			
-			//Valid format
-			if(!lastValueIsNumber){
-				if(separators.contains(value)){
-					isValid = false;
-				}
-			}
-			lastValueIsNumber = isNumber(value);
-		}
-		return isValid;
-	}
-	
-	private boolean isNumber(String value){
-		try{
-			Integer.parseInt(value);
-			return true;
-		}
-		catch(NumberFormatException e){
-			return false;
-		}
-	}
-	
-	private void checkSeparators(){
 		if(this.numbers.startsWith("//")){
-			separators.add(this.numbers.substring(2, 3));
-			this.numbers = this.numbers.substring(4, this.numbers.length());
+			matcher = pattern.matcher(numbers);
+		    if(!matcher.matches()){
+		    	return false;
+		    }
+		    String[] numberParts = numbers.split(NEW_LINE);
+		    String separatorString = numberParts[0];
+			separatorString = separatorString.substring(2, separatorString.length());
+			String delimiter = separatorString.split(DELIMITTERS_END)[0];
+		    
+			separators.add(delimiter.substring(1, delimiter.length()));
+			this.numbers = numberParts[1];
 		}
+		
+		return true;
 		
 	}
 
