@@ -1,7 +1,5 @@
 import static org.junit.Assert.*;
 
-import java.util.IllegalFormatException;
-
 import org.junit.Before;
 import org.junit.Test;
 
@@ -35,7 +33,7 @@ public class CalculatorTest {
 		assertEquals(0, calculator.add(null));
 	}
 	
-	@Test(expected=NumberFormatException.class)
+	@Test(expected=IllegalArgumentException.class)
 	public void charactersStringInputTest(){
 		calculator.add("a");
 	}
@@ -50,9 +48,9 @@ public class CalculatorTest {
 		assertEquals(3, calculator.add("1\n1,1"));
 	}
 	
-	@Test
+	@Test(expected=IllegalArgumentException.class)
 	public void newLineSeparatorInvalidFormatTest(){
-		assertEquals(3, calculator.add("1,\n"));
+		calculator.add("1,\n");
 	}
 
 }
