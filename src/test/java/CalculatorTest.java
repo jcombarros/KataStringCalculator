@@ -88,10 +88,14 @@ public class CalculatorTest {
 		assertEquals(2, calculator.add("//[;]\n1;-1001;1"));
 	}
 	
-	
 	@Test
 	public void multipleSeparatorTest(){
 		assertEquals(3, calculator.add("//[qqq]\n1qqq2"));
+	}
+	
+	@Test
+	public void multipleSeparatorsTest(){
+		assertEquals(6, calculator.add("//[qqq][aaa]\n1qqq2aaa3"));
 	}
 
 }
