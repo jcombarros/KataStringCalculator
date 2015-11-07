@@ -40,7 +40,7 @@ public class CalculatorTest {
 		calculator.add("a");
 	}
 	
-	@Test(expected=IllegalFormatException.class)
+	@Test(expected=IllegalArgumentException.class)
 	public void threeNumberesStringInputTest(){
 		calculator.add("1,1,1");
 	}
