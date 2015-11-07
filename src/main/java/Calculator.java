@@ -61,6 +61,7 @@ public class Calculator {
 		if(numbers == null || numbers.equals(EMPTY_STRING)){
 			return 0;
 		}
+		checkSeparators();
 		if(!isValidInput()){
 			throw new IllegalArgumentException("Illegal format");
 		}
@@ -77,11 +78,7 @@ public class Calculator {
 	}
 	
 	private boolean isValidInput(){
-		if(this.numbers.startsWith("//")){
-			separators.add(this.numbers.substring(2, 3));
-			this.numbers = this.numbers.substring(4, this.numbers.length());
-		}
-		
+
 		
 		boolean isValid = true;
 		List<String> values = Arrays.asList(this.numbers.split(""));
@@ -112,6 +109,14 @@ public class Calculator {
 		catch(NumberFormatException e){
 			return false;
 		}
+	}
+	
+	private void checkSeparators(){
+		if(this.numbers.startsWith("//")){
+			separators.add(this.numbers.substring(2, 3));
+			this.numbers = this.numbers.substring(4, this.numbers.length());
+		}
+		
 	}
 
 }
