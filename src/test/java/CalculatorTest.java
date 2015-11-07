@@ -60,12 +60,32 @@ public class CalculatorTest {
 	
 	@Test(expected=IllegalArgumentException.class)
 	public void negativeNumberInputTest(){
-		assertEquals(3, calculator.add("1,-1,1"));
+		calculator.add("1,-1,1");
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
 	public void negativeSimbolInputTest(){
-		assertEquals(3, calculator.add("1,-,1"));
+		calculator.add("1,-,1");
+	}
+	
+	@Test
+	public void BigNumbersInputTest(){
+		assertEquals(2, calculator.add("1,1001,1"));
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void BigNumbers2InputTest(){
+		assertEquals(2, calculator.add("1,1000,1"));
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void BigNumbers3InputTest(){
+		assertEquals(2, calculator.add("//;\n1;1000;1"));
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void BigNumbers4InputTest(){
+		assertEquals(2, calculator.add("//;\n1;-1001;1"));
 	}
 
 }
