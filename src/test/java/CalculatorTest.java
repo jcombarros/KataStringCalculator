@@ -73,17 +73,17 @@ public class CalculatorTest {
 		assertEquals(2, calculator.add("1,1001,1"));
 	}
 	
-	@Test(expected=IllegalArgumentException.class)
+	@Test
 	public void BigNumbers2InputTest(){
-		assertEquals(2, calculator.add("1,1000,1"));
+		assertEquals(1002, calculator.add("1,1000,1"));
 	}
 	
-	@Test(expected=IllegalArgumentException.class)
+	@Test
 	public void BigNumbers3InputTest(){
-		assertEquals(2, calculator.add("//;\n1;1000;1"));
+		assertEquals(1002, calculator.add("//;\n1;1000;1"));
 	}
 	
-	@Test(expected=IllegalArgumentException.class)
+	@Test
 	public void BigNumbers4InputTest(){
 		assertEquals(2, calculator.add("//;\n1;-1001;1"));
 	}
