@@ -13,6 +13,7 @@ public class Calculator {
 	private static final String NEW_LINE = "\n";
 	private static final String SPLIT_LINE = "|";
 	private static final String NEGATIVE_NUMBER = "-";
+	private static final int BIG_NUMBER = 1000;
 	
 	public Calculator(){
 		separators = new ArrayList<String>();
@@ -74,10 +75,12 @@ public class Calculator {
 		int result = 0;
 		for (String value : values) {
 			int intValue = Integer.parseInt(value);
-			result = result += intValue;
-			if(value.startsWith(NEGATIVE_NUMBER)){
-				withNegativeNumbers = true;
-				negativeNumbers.add(value);
+			if(intValue <= BIG_NUMBER){
+				result = result += intValue;
+				if(value.startsWith(NEGATIVE_NUMBER)){
+					withNegativeNumbers = true;
+					negativeNumbers.add(value);
+				}
 			}
 		}
 		
