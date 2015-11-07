@@ -52,5 +52,10 @@ public class CalculatorTest {
 	public void newLineSeparatorInvalidFormatTest(){
 		calculator.add("1,\n");
 	}
+	
+	@Test
+	public void changeSeparatorTest(){
+		assertEquals(3, calculator.add("//;\n1;2"));
+	}
 
 }
