@@ -44,5 +44,15 @@ public class CalculatorTest {
 	public void threeNumberesStringInputTest(){
 		assertEquals(3, calculator.add("1,1,1"));
 	}
+	
+	@Test
+	public void newLineSeparatorTest(){
+		assertEquals(3, calculator.add("1\n1,1"));
+	}
+	
+	@Test
+	public void newLineSeparatorInvalidFormatTest(){
+		assertEquals(3, calculator.add("1,\n"));
+	}
 
 }
