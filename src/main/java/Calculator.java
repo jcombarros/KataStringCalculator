@@ -72,7 +72,7 @@ public class Calculator {
 		if(numbers == null || numbers.equals(EMPTY_STRING)){
 			return 0;
 		}
-		checkSeparators();
+
 		if(!(isValidInput() && checkSeparators())){
 			throw new IllegalArgumentException("Illegal format");
 		}
