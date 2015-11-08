@@ -17,7 +17,7 @@ public class Calculator {
 	private static final int ZERO_NUMBER = 0;
 	private static final int BIG_NUMBER = 1000;
 	
-	
+	private static final String FORWARD_SLASH = "//";
 	private static final String DELIMITTERS_PATTERN = "\\/\\/(\\[([^0-9]+)\\])+\n(.*)";
 	private static final String DELIMITTERS_END = "\\]";
 	
@@ -38,7 +38,7 @@ public class Calculator {
 	}
 	
 	public String getNumbers() {
-		return numbers;
+		return this.numbers;
 	}
 
 	public void setNumbers(String numbers) {
@@ -68,8 +68,8 @@ public class Calculator {
 	}
 
 	public int add(String numbers){
-		this.numbers = numbers;
-		if(numbers == null || numbers.equals(EMPTY_STRING)){
+		setNumbers(numbers);
+		if(this.numbers == null || this.numbers.equals(EMPTY_STRING)){
 			return 0;
 		}
 
@@ -105,7 +105,7 @@ public class Calculator {
 		String separatorsString = separatorsToString();
 		Pattern pattern = Pattern.compile(new StringBuilder(NUMBERS_PATTERN_BEGGINGING).append(separatorsString).append(NUMBERS_PATTERN_END).toString());
 		Matcher matcher;
-		matcher = pattern.matcher(numbers);
+		matcher = pattern.matcher(this.numbers);
 	    if(!matcher.matches()){
 	    	return false;
 	    }
@@ -116,12 +116,12 @@ public class Calculator {
 		Pattern pattern = Pattern.compile(DELIMITTERS_PATTERN);
 		Matcher matcher;
 
-		if(this.numbers.startsWith("//")){
-			matcher = pattern.matcher(numbers);
+		if(this.numbers.startsWith(FORWARD_SLASH)){
+			matcher = pattern.matcher(this.numbers);
 		    if(!matcher.matches()){
 		    	return false;
 		    }
-		    String[] numberParts = numbers.split(NEW_LINE);
+		    String[] numberParts = this.numbers.split(NEW_LINE);
 		    String separatorString = numberParts[0];
 			separatorString = separatorString.substring(2, separatorString.length());
 			List<String> delimiters = Arrays.asList(separatorString.split(DELIMITTERS_END));
